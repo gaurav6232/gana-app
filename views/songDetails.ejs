@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Details</title>
+    <link rel="stylesheet" href="/stylesheets/songDetails.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+  <div id="main">
+    <div class="left">
+      <button>
+        <a href="/">
+          <i class="ri-home-4-fill"></i>
+          <p>Home</p>
+        </a>
+      </button>
+
+      <button id="search">
+        <a href="/search">
+          <i class="ri-search-2-line"></i>
+          <p>Search</p>
+        </a>
+      </button>
+    </div>
+
+    <div id="right">
+      <div class="right-icon-close">
+        <a href="/">
+          <i class="ri-close-circle-line"></i>
+        </a>
+
+        <a id="icon-div-a" href="/">home</a>
+      </div>
+
+      <div class="song-details">
+        <img src="/poster/<%= song.poster %>" alt="Poster">
+        <h2><%= song.title %></h2>
+        <p><%= song.artist %></p>
+        <p><%= song.album %></p>
+      </div>
+
+      <div class="remaining-songs">      
+        <% remainingSongs.forEach(song => { %>
+          <div class="song" onclick="songCardClicked(<%= JSON.stringify(song) %>)">
+            
+             
+            <div class="poster-img">
+                <img src="/poster/<%= song.poster %>" alt="">
+            </div>
+            <div class="text">
+                <p><%= song.title %></p>
+                <h5><%= song.artist %></h5>
+                <div class="playButton">
+                    <i class="ri-play-circle-fill"></i>
+                </div>
+               
+                <!-- <div class="liner-stream">
+                    <h1>Stream</h1>
+                </div> -->
+            </div>
+        </div>
+        <% }); %>
+      </div>
+
+      <audio id="audio" class="song-audio" src="/stream/<%= song.filename %>" controls></audio>
+
+
+    </div>
+  </div>
+
+  <script>
+    function songCardClicked(song) {
+        // Update the main song details
+        document.querySelector('.song-details img').setAttribute('src', `/poster/${song.poster}`);
+        document.querySelector('.song-details h2').textContent = song.title;
+        document.querySelector('.song-details p:first-of-type').textContent = song.artist;
+        document.querySelector('.song-details p:last-of-type').textContent = song.album;
+        
+        // Update and play the audio
+        const audio = document.getElementById('audio');
+        audio.setAttribute('src', `/stream/${song.filename}`);
+        audio.play();
+    }
+  </script>
+</body>
+</html>

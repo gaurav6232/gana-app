@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+<div id="main">
+    <div class="left">
+        <div id="navication-div">
+            <button>
+                <i class="ri-home-4-fill"></i>
+                <p>Home</p>
+            </button>
+    
+            <button>
+                <a href="/search">
+                    <i class="ri-search-2-line"></i>
+                    <p>Search</p>
+                </a>
+            </button>
+
+            <button>
+                <a href="/uploadmusic">
+                    <i class="ri-upload-cloud-line"></i>
+                    <p>upload your muaic</p>
+                </a>
+            </button>
+        </div>
+
+        <div class="bottom-div">
+        
+            
+                 <div id="song-play-div" data-poster="poster.jpg" data-title="Song Title" data-artist="Artist Name" data-album="Album Name" onclick="openSongDetailsPage()">
+                     <div class="song-parent">
+                         <img id="song-poster" src="poster.jpg" alt="Poster">
+                         <h5 id="song-title">Song Title</h5>
+                         <p id="song-artist">Artist Name</p>
+                         <p id="song-album">Album Name</p>
+                     </div>
+                 </div>
+           
+            
+            <div id="b-text-div">
+                <audio id="audioplay" src="/songs/your_current_song_filename_here" controls></audio>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        
+        <div class="slider">
+            <% allSongs.forEach(song => { %>
+            <div id="box" onclick="songCardClicked(<%= JSON.stringify(song) %>)">
+                <div class="box-img">
+                    <img src="/poster/<%= song.poster %>" alt="">
+                </div>
+                <div class="text">
+                    <h2><%= song.artist %></h2>
+                    <p><%= song.title %></p>
+                    <p><%= song.album %></p>
+                    <div id="star-icon">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                </div>
+                <div class="playButton">
+                    <i class="ri-play-circle-fill"></i>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        
+        <div class="musics">
+            <% if (allSongs && allSongs.length > 0) {
+                allSongs.forEach(song => { %>
+                    <div class="song" onclick="songCardClicked(<%= JSON.stringify(song) %>)">
+                        <div class="div">
+                            <img src="/poster/<%= song.poster %>" alt="">
+                        </div>
+                         
+                        <div class="container">
+                            <img src="/poster/<%= song.poster %>" alt="">
+                        </div>
+                        <div class="text">
+                            <p><%= song.title %></p>
+                            <h5><%= song.artist %></h5>
+                            <div class="playButton">
+                                <i class="ri-play-circle-fill"></i>
+                            </div>
+                            <div class="liner"> 
+                                <img src="/poster/<%= song.poster %>" alt="">
+                            </div>
+                            
+                        </div>
+                    </div>
+            <% }); } %>
+        </div>
+        
+    </div>
+</div>
+<script>
+    function songCardClicked(song) {
+        document.querySelector('audio').setAttribute('src', `/stream/${song.filename}`);
+        document.querySelector('audio').play();
+        
+        document.getElementById('song-poster').setAttribute('src', `/poster/${song.poster}`);
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('song-artist').textContent = song.artist;
+        document.getElementById('song-album').textContent = song.album;
+
+        window.currentSong = song;
+ 
+    }
+
+    function printCurrentSongDetails() {
+        if (window.currentSong) {
+            console.log(`Currently playing song: ${window.currentSong.filename}`);
+            console.log(`Artist: ${window.currentSong.artist}`);
+            console.log(`Title: ${window.currentSong.title}`);
+            console.log(`Album: ${window.currentSong.album}`);
+        } else {
+            console.log('No song is currently playing.');
+        }
+    }
+
+    function openSongDetailsPage() {
+    const songDiv = document.getElementById('song-play-div');
+    const poster = songDiv.getAttribute('data-poster');
+    const title = songDiv.getAttribute('data-title');
+    const artist = songDiv.getAttribute('data-artist');
+    const album = songDiv.getAttribute('data-album');
+
+    const queryParams = new URLSearchParams({
+        poster: poster,
+        title: title,
+        artist: artist,
+        album: album
+    }).toString();
+
+    window.location.href = `songDetails.ejs${queryParams}`;
+}
+
+</script>
+
+
+<script>
+    function songCardClicked(song) {
+        document.querySelector('audio').setAttribute('src', `/stream/${song.filename}`);
+        document.querySelector('audio').play();
+        
+        document.getElementById('song-poster').setAttribute('src', `/poster/${song.poster}`);
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('song-artist').textContent = song.artist;
+        document.getElementById('song-album').textContent = song.album;
+
+        window.currentSong = song;
+    }
+
+    function openSongDetailsPage() {
+        const song = window.currentSong;
+        
+        if (song) {
+            const queryParams = new URLSearchParams({
+                poster: song.poster,
+                title: song.title,
+                artist: song.artist,
+                album: song.album,
+                filename: song.filename
+            }).toString();
+            
+            window.location.href = `/songDetails?${queryParams}`;
+        } else {
+            console.log('No song is currently playing.');
+        }
+    }
+
+    document.getElementById('song-play-div').addEventListener('click', openSongDetailsPage);
+</script>
+
+<script>
+    function songCardClicked(song) {
+        document.querySelector('audio').setAttribute('src', `/stream/${song.filename}`);
+        document.querySelector('audio').play();
+        
+        document.getElementById('song-poster').setAttribute('src', `/poster/${song.poster}`);
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('song-artist').textContent = song.artist;
+        document.getElementById('song-album').textContent = song.album;
+
+        window.currentSong = song;
+    }
+
+    function openSongDetailsPage() {
+        const song = window.currentSong;
+
+        if (song) {
+            const queryParams = new URLSearchParams({
+                poster: song.poster,
+                title: song.title,
+                artist: song.artist,
+                album: song.album,
+                filename: song.filename
+            }).toString();
+            
+            window.location.href = `/songDetails?${queryParams}`;
+        } else {
+            console.log('No song is currently playing.');
+        }
+    }
+
+    document.getElementById('song-play-div').addEventListener('click', openSongDetailsPage);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+#main{
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    gap: 10px;
+    background-color: #000000;
+}
+
+.left{
+    height: 100%;
+    width: 20%;
+    background-color: #121212;
+    position: relative;
+
+}
+
+.left button,.left a{
+    font-size: 32px;
+    color: #fff;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    display: flex;
+    padding: 16px;
+    gap: 25px;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+}
+
+.left button:hover, .left a:hover{
+    background-color: #333;
+}
+
+
+.left button p,.left a p{
+    font-size: 18px;
+}
+
+.bottom-div{
+    width: 100%;
+    height: 80vh;
+    background-color: red;
+    position: absolute;
+    bottom: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-details{
+    width: 80vw;
+    height: 100vh;
+    background-color: darkcyan;
+    overflow: hidden;
+}
+.song-details img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+.remaining-songs{
+    width: 100%;
+    height: 24vh;
+    position: absolute;
+    bottom: 10%;
+  
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+
+
+}
+.remaining-songs::-webkit-scrollbar{
+    display: none;
+}
+
+.song{
+    width: 20vw;
+    height: 100%;
+    margin-right: 15px; /* Flex items ke beech ka gap */
+    border-radius: 10px;
+    background-color: darkcyan;
+    padding: 15px 20px;
+    position: relative;
+   
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#poster-img{
+    width: 100%;
+    height: 10vh;
+     
+    position: relative;
+    display: flex;
+     
+}
+
+.poster-img img{
+    width: 8vw;
+    height: 14vh;
+    object-fit: cover;
+}
+
+.poster-text {
+    width: 14vw;
+    height: 10vh;
+     
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 20px;
+}
+.poster-text p{
+    max-width: 10vw;
+    overflow: hidden;
+   position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    font-family: "syne";
+    color: #fff;
+    gap: 5;
+    top: 30%;
+    opacity: 80%;
+    
+}
+
+.poster-text h4{
+    max-width: 10vw;
+    overflow: hidden;
+     
+   position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 20px;
+    font-family: "syne";
+    color:  #fff;
+    
+}
+
+#poster-icon{
+    width: 15vw;
+    height: 8vh;
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+}
+#poster-icon p{
+    max-width: 5vw;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    font-family: "syne";
+    color: #fff;
+    gap: 5;
+    top: 30%;
+    opacity: 80%;
+    left: 20%;
+
+}
+
+#poster-icon i{
+     font-size: 2vw;
+     margin-top: 12px;
+}
+#right i{
+    display: none;
+}
+
+
+audio{
+    width: 75%;
+    height: 10vh;
+    background-color: transparent;
+    position: absolute;
+    left: 22%;
+     
+    bottom: 0;
+
+}
+
+.lap-audio{
+    /* display: none; */
+}
+
+
+
+@media only screen and (max-width: 768px){
+    #main{
+        display: flex;
+        flex-direction: column;
+    }
+    .left{
+        position: absolute;
+         bottom: 0;
+         width: 100%;
+         height: 5vh;
+         background-color: transparent;
+         display: flex;
+         gap: 1px;
+          
+
+    }
+    .left p{
+        display: none;
+    }
+    .left button{
+         gap: 5vw;
+        width:10vw;
+        align-items: center;
+         
+    }
+
+    #search{
+        display: none;
+    }
+
+    #right i{
+        
+        color: #3e3c49;
+        z-index: 99;
+        padding: 10px;
+        font-size: 10vw;
+        display: initial;
+    }
+
+    .right-icon-close {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        position: absolute;
+        z-index: 99;
+        padding: 20px;
+    }
+
+    .right-icon-close #icon-div-a{
+        text-decoration: none;
+        padding: 6px 5px;
+        border: 2px solid #333;
+        border-radius: 5px;
+        color: #fff;
+        background-color: rgb(32, 32, 69);
+    }
+
+
+    .song-details{
+        width: 100%;
+        height: 60vh;
+         
+        border: 2px solid #000000;
+        background: rgb(255, 255, 255);
+        backdrop-filter: saturate(180%) blur(10px);
+        
+    }
+
+    .song-details img{
+
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+        /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+        /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+    }
+    
+
+    .song-details h2 {
+        color: #000;
+        display: none;
+    }
+    #poster-icon{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        color: #000;
+        margin-top: -10px;
+    }
+    #poster-icon i{
+        color: #000;
+        font-size: 16vw;
+        margin-bottom: 15px;
+    }
+     
+    #poster-icon p{
+        max-width: 45vw;
+        margin-left: 10vw;
+        color: #000;
+        margin-bottom: 10px;
+    }
+
+    #poster-img{
+        width: 60vw;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #poster-img img{
+        width: 20vw;
+        height: 10vh;
+        border-radius: 30px;
+        display: none;
+    }
+    .poster-img img{
+        width: 60vw;
+        height: 40vh;
+        border-radius: 30px;
+    }
+     
+
+     
+
+
+    .remaining-songs{
+        height: 70vh;
+    }
+     
+
+    .song{
+        margin-top: 120px;
+        background-color: #fff;
+        width:  100vw;
+        height: 80%;
+        border-radius: 30px;
+        color: #000000;
+    }
+
+     
+
+   
+
+    audio{
+        width: 100%;
+        position: absolute;
+        bottom: 20%;
+        left: 0;
+    }
+}
